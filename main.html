@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Recommendation System</title>
+	<style>
+		body {
+			background-color: #FFE4E1;
+		}
+		.container {
+			margin: auto;
+			padding: 20px;
+			width: 50%;
+			background-color: #F08080;
+			border-radius: 10px;
+		}
+		.form-group {
+			margin-bottom: 10px;
+		}
+		label {
+			display: block;
+			font-size: 20px;
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+		input[type="checkbox"] {
+			margin-right: 10px;
+		}
+		button[type="submit"] {
+			display: block;
+			margin-top: 10px;
+			padding: 10px 20px;
+			font-size: 20px;
+			font-weight: bold;
+			background-color: #FF69B4;
+			color: #FFFFFF;
+			border-radius: 5px;
+			border: none;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+    <h1>PCOS - Meal Recommendation System</h1>
+    <form id="form" method="POST" action="/submit">
+        <div class="form-group">
+            <label>Select your diseases:</label>
+            <input type="checkbox" name="disease" value="kidney_disease">Kidney disease
+            <input type="checkbox" name="disease" value="pregnancy">Pregnancy
+            <input type="checkbox" name="disease" value="hypertension">Hypertension
+            <input type="checkbox" name="disease" value="anemia">Anemia
+            <input type="checkbox" name="disease" value="scurvy">Scurvy
+            <input type="checkbox" name="disease" value="cancer">Cancer
+            <input type="checkbox" name="disease" value="rickets">Rickets
+            <input type="checkbox" name="disease" value="goitre">Goitre
+            <input type="checkbox" name="disease" value="obesity">Obesity
+            <input type="checkbox" name="disease" value="diabetes">Diabetes
+            <input type="checkbox" name="disease" value="heart_disease">Heart disease
+            <input type="checkbox" name="disease" value="eye_disease">Eye disease
+        </div>
+        <div class="form-group">
+            <label>Select your diets:</label>
+            <input type="checkbox" name="diet" value="ketogenic_diet">Ketogenic diet
+            <input type="checkbox" name="diet" value="dash_diet">Dash diet
+            <input type="checkbox" name="diet" value="type_a_diet">Type A diet
+            <input type="checkbox" name="diet" value="omni_diet">Omni diet
+            <input type="checkbox" name="diet" value="high_protein_diet">High protein diet
+            <input type="checkbox" name="diet" value="low_sodium_diet">Low sodium diet
+            <input type="checkbox" name="diet" value="vegan_diet">Vegan diet
+            <input type="checkbox" name="diet" value="high_fiber_diet">High fiber diet
+            <input type="checkbox" name="diet" value="high_protein_diet">High protein diet
+            <input type="checkbox" name="diet" value="low_fat_diet">Low fat diet
+            <input type="checkbox" name="diet" value="low_carb_diet">Low carb diet
+            <input type="checkbox" name="diet" value="alkaline_diet">Alkaline diet
+            <input type="checkbox" name="diet" value="gluten_free_diet">Gluten free diet
+            <input type="checkbox" name="diet" value="Mediterranean_diet">Mediterranean diet
+            <input type="checkbox" name="diet" value="paleo_diet">Paleo diet
+            <input type="checkbox" name="diet" value="type_o_diet">Type O diet
+        </div>
+        <div class="form-group">
+            <label>Select the needed vitamins:</label>
+            <input type="checkbox" name="vitamins" value="vitamin_c">Vitamin C
+            <input type="checkbox" name="vitamins" value="iron">Iron
+            <input type="checkbox" name="vitamins" value="phosphorus">Phosphorus
+            <input type="checkbox" name="vitamins" value="vitamin_d">Vitamin D
+            <input type="checkbox" name="vitamins" value="calcium">Calcium
+            <input type="checkbox" name="vitamins" value="sodium">Sodium
+            <input type="checkbox" name="vitamins" value="fiber">Fiber
+            <input type="checkbox" name="vitamins" value="chloride">Chloride
+            <input type="checkbox" name="vitamins" value="vitamin_e">Vitamin E
+            <input type="checkbox" name="vitamins" value="selenium">Selenium
+            <input type="checkbox" name="vitamins" value="carbohydrates">Carbohydrates
+            <input type="checkbox" name="vitamins" value="potassium">Pottasium
+            <input type="checkbox" name="vitamins" value="manganese">Manganese
+            <input type="checkbox" name="vitamins" value="iodine">Iodine
+        </div>
+        <button type="submit">SUBMIT</button>
+    </form>
+    <p id="output">Output</p>
+</div>        
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#form").submit(function(e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            console.log(form.serialize());
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                dataType: "json",
+                success: function(res) {
+                    $("#output").html(res.result);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
